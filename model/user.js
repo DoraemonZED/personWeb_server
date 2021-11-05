@@ -1,7 +1,10 @@
 const mongoose = require('../mongodb/index')
 
 let UserSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    unique: true//用户名唯一
+  },
   pwd: String,
 })
 

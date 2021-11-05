@@ -1,6 +1,13 @@
 
-###
-get http://127.0.0.1:5501/index
+###用户登录
+GET http://127.0.0.1:9901/user/login HTTP/1.1
 
-###
-GET http://127.0.0.1:5502/user/login HTTP/1.1
+###用户注册
+POST http://127.0.0.1:9901/user/regist HTTP/1.1
+content-type: application/json
+
+{
+    "uid":"admin1",
+    "pwd":"123456"
+}
+

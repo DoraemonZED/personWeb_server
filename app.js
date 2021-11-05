@@ -1,11 +1,11 @@
 const Koa = require('koa')
-const router = require('koa-router')()
+const bodyParser = require("koa-bodyparser");
 const app = new Koa()
 const { prot } = require('./config')
-
-router.use(require('./routers/index.js'))
+const router = require('./routers/index.js') //引入路由
 
 app
+  .use(bodyParser())
   .use(router.routes())
   .use(router.allowedMethods())
   .listen(prot,()=>{

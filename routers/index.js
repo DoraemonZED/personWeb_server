@@ -4,7 +4,8 @@ const router = require('koa-router')()
 //   ctx.body = '请求完成'
 // })
 
-router.use('/user',require('./user'))
+router.use('/user', require('./user').routes())
+router.use('/list', require('./list').routes())
 
 
-module.exports = router.routes()
+module.exports = router
