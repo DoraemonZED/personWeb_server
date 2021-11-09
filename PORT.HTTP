@@ -11,3 +11,7 @@ content-type: application/json
     "pwd":"123456"
 }
 
+###获取路由和列表
+get http://127.0.0.1:9901/list/route HTTP/1.1
+
+
