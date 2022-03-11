@@ -14,11 +14,11 @@ class UserController {
             pwd: '123456',
             email: '2433255732@qq.com'
         })
-        console.log(a)
+        console.log(1)
 
-        ctx.body = {
-            code: '1'
-        }
+        // ctx.body = {
+        //     code: '1'
+        // }
     }
 }
 
