@@ -1,11 +1,14 @@
 const mongoose = require('../mongodb/index')
 
 let UserSchema = new mongoose.Schema({
-  name: {
+  name: {//用户名
     type: String,
-    unique: true//用户名唯一
+    unique: true
   },
-  pwd: String,
+  pwd: String,//密码
+  email: String //邮箱
+},{
+  versionKey: false
 })
 
-module.exports = mongoose.model('user_detail', UserSchema, 'user_detail')
+module.exports = mongoose.model('user_detail', UserSchema)
