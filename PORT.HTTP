@@ -1,17 +1,32 @@
 
-###测试
-GET http://127.0.0.1:9901/index HTTP/1.1
+@port = 127.0.0.1:9901/
 
-###用户注册
-POST http://127.0.0.1:9901/user/regist HTTP/1.1
+
+###创建博客
+POST http://{{port}}blogs/write
 content-type: application/json
 
 {
-    "uid":"admin1",
-    "pwd":"123456"
+    "title": "test1",
+    "content": "#123\n```\n console.log(123) \n```",
+    "author": "Doraemon",
+    "navid": "622efba8e61f6f9bb859927f"
 }
 
-###获取路由和列表
-get http://127.0.0.1:9901/list/route HTTP/1.1
+###获取博客文章
+GET http://{{port}}blogs/blog_paper?id=622efba8e61f6f9bb859927f
 
+###创建nav
+POST http://{{port}}blogs/blogNav
+content-type: application/json
 
+{
+    "state":"1",
+    "title":"Node JS"
+}
+
+### 获取nav
+GET http://{{port}}blogs/blogNav
+
+### 获取nTitle
+GET http://{{port}}blogs/getTitle?navid=6232e3422ec954196d961584

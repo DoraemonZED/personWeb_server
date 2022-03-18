@@ -2,7 +2,7 @@ const router = require('koa-router')();
 const {
     userLogin,
     userRegist
-} = require('../controller/uer-controller')
+} = require('../controller/user-controller')
 const {
     userVerify
 } = require('../middleware/user')
