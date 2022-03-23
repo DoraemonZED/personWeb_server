@@ -7,18 +7,20 @@ const {
     showBlog,
 } = require('../controller/blogs-controller')
 
+const {
+    vertiTitle, //添加新导航分类时验证重复
+} = require('../middleware/blogs')
+
 router.get('/blogNav', blogNav)//查询nav
-router.post('/blogNav', createNav)//创建nav
 
-router.get('/getTitle', getTitle)//根据navid查询标题
+    .post('/blogNav', vertiTitle, createNav)//创建nav
 
-//写博客
-router.post('/write', writeBlog)
+    .get('/getTitle', getTitle)//根据navid查询标题
 
-//修改博客
-// router.post('/modify')
+    .post('/write', writeBlog)//写博客
 
-// // 请求博客文章
-router.get('/blog_paper', showBlog)
+    // .post('/modify')//修改博客
+
+    .get('/blog_paper', showBlog)// 请求博客文章
 
 module.exports = router

@@ -21,12 +21,12 @@ POST http://{{port}}blogs/blogNav
 content-type: application/json
 
 {
-    "state":"1",
-    "title":"Node JS"
+    "state":"2",
+    "title":"CPP"
 }
 
 ### 获取nav
 GET http://{{port}}blogs/blogNav
 
 ### 获取nTitle
-GET http://{{port}}blogs/getTitle?navid=6232e3422ec954196d961584
+GET http://{{port}}blogs/getTitle?navid=622efba8e61f6f9bb859927f

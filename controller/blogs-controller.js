@@ -13,11 +13,11 @@ class BlogConttroller {
                 result: res
             }
         } catch (error) {
-            ctx.app.emit('error', [400, error], ctx)
+            ctx.app.emit('error', [500, '查询错误', error], ctx)
         }
     }
 
-    async blogNav(ctx, next){//查询博客标题
+    async blogNav(ctx, next){//查询导航
         try {
             let res = await BlogNavSchema.find()
             ctx.status = 200
@@ -27,7 +27,7 @@ class BlogConttroller {
                 result: res
             }
         } catch (error) {
-            ctx.app.emit('error', [400, error], ctx)
+            ctx.app.emit('error', [500, '查询错误', error], ctx)
         }
     }
 
@@ -36,6 +36,12 @@ class BlogConttroller {
 
         try {
             let res = await BlogSchema.find({ navid },{ title: 1 })
+
+            if(res.length <= 0){
+                ctx.app.emit('error', [404, '未查询到数据'], ctx)
+                return
+            }
+
             ctx.status = 200
             ctx.body = {
                 code: 200,
@@ -44,7 +50,7 @@ class BlogConttroller {
             }
 
         } catch (error) {
-            ctx.app.emit('error', [400, '创建失败'], ctx)
+            ctx.app.emit('error', [500, '查询错误', error], ctx)
         }
     }
     
@@ -62,11 +68,11 @@ class BlogConttroller {
                 result: res._id
             }
         } catch (error) {
-            ctx.app.emit('error', [400, '创建失败'], ctx)
+            ctx.app.emit('error', [500, '创建错误', error], ctx)
         }
     }
 
-    async showBlog(ctx, next){//请求博客内容
+    async showBlog(ctx, next){//获取博客内容
         let { id } = ctx.query
         let res = await BlogSchema.findById(id)
         ctx.status = 200

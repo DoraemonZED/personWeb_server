@@ -10,7 +10,7 @@ app.on('error', (err, ctx) => {
   ctx.body = {
     code: err[0],
     message: err[1],
-    result: ''
+    result: err[2]?err[2]:''
   }
 })
 
