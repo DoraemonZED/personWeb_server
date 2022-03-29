@@ -1,5 +1,7 @@
 const Koa = require('koa')
-const bodyParser = require("koa-bodyparser");
+const KoaBody = require('koa-body');
+const KoaStatic = require('koa-static')
+const path = require('path')
 const app = new Koa()
 const { prot } = require('./config')
 const router = require('./routers/index.js') //引入路由
@@ -15,7 +17,10 @@ app.on('error', (err, ctx) => {
 })
 
 app
-  .use(bodyParser())
+  .use(KoaBody({
+    multipart: true
+  }))
+  .use(KoaStatic(path.join(__dirname, 'public')))
   .use(logs())
   .use(router.routes())
   .use(router.allowedMethods())
