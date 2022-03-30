@@ -61,6 +61,8 @@ class BlogConttroller {
                 navid, title, content, author, 
                 up_time: new Date()
             })
+            console.log(111,ctx.request.body.content['参数'])
+
             ctx.status = 200
             ctx.body = {
                 code: 200,
@@ -73,8 +75,10 @@ class BlogConttroller {
     }
 
     async showBlog(ctx, next){//获取博客内容
-        let { id } = ctx.query
+        let { id, state } = ctx.query
         let res = await BlogSchema.findById(id)
+
+
         ctx.status = 200
         ctx.body = {
             code: 200,

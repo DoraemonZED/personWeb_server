@@ -7,20 +7,24 @@ class UploadFile {
         try {
             let file  = ctx.request.files.file
             
-            let reader = fs.createReadStream(file.path)
-
-            let upStream = fs.createWriteStream(path.join('public/images', file.name))
-            reader.pipe(upStream)
-
-            // const a = await fsP.readdir(path.join('public/images'))
-            // console.log(a)
+            let list = await fsP.readdir(path.join('public/images'))
             
+            if(list.includes(file.name)){
+                ctx.app.emit('error', [402, '已存在同名文件'], ctx)
+            }else{
+                let reader = fs.createReadStream(file.path)
 
-            ctx.status = 200
-            ctx.body = {
-                path: 'file.path'
-                // path: file.path
+                let upStream = fs.createWriteStream(path.join('public/images', file.name))
+                reader.pipe(upStream)
+
+                ctx.status = 200
+                ctx.body = {
+                    code: 200,
+                    message: '上传图片成功',
+                    result: ctx.origin + '/images/' + file.name
+                }
             }
+            
         } catch (error) {
             console.log(error)
             ctx.app.emit('error', [500, '上传错误', error], ctx)

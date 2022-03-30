@@ -9,7 +9,7 @@ let BlogSchema = new mongoose.Schema({
 
   up_time: Date,//文章创建和修改时间
 
-  content: String,//文章内容
+  content: mongoose.Mixed,//文章内容
 
   author: String,//作者
 
