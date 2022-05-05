@@ -6,6 +6,6 @@ module.exports = () => {
     return async( ctx, next ) => {
         logs(ctx.req.url)
         await next()
-        logs(ctx.status)  
+        logs(ctx.body)  
     }
 }

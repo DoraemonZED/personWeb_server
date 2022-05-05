@@ -57,11 +57,11 @@ class BlogConttroller {
     async writeBlog(ctx, next){//写博客
         let { navid, title, content, author } = ctx.request.body
         try {
+            if(!navid) throw new Error('创建错误navid不存在')
             let res = await BlogSchema.create({
                 navid, title, content, author, 
                 up_time: new Date()
             })
-            console.log(111,ctx.request.body.content['参数'])
 
             ctx.status = 200
             ctx.body = {
@@ -77,7 +77,6 @@ class BlogConttroller {
     async showBlog(ctx, next){//获取博客内容
         let { id, state } = ctx.query
         let res = await BlogSchema.findById(id)
-
 
         ctx.status = 200
         ctx.body = {
