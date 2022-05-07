@@ -1,4 +1,4 @@
-const BlogSchema = require('../model/blogs')
+const BlogSchema = require('../model/blogs_info')
 const BlogNavSchema = require('../model/blogs_nav')
 
 class BlogConttroller {
@@ -55,14 +55,18 @@ class BlogConttroller {
     }
     
     async writeBlog(ctx, next){//写博客
-        let { navid, title, content, author } = ctx.request.body
+        let { navid, title, content, author, titleid } = ctx.request.body
         try {
-            if(!navid) throw new Error('创建错误navid不存在')
-            let res = await BlogSchema.create({
-                navid, title, content, author, 
-                up_time: new Date()
-            })
-
+            let res = null
+            if(titleid) {
+                res = BlogSchema.findOneAndUpdate({})
+            }else{
+                if(!navid) throw new Error('创建错误navid不存在')
+                res = await BlogSchema.create({
+                    navid, title, content, author, 
+                    up_time: new Date()
+                })
+            }
             ctx.status = 200
             ctx.body = {
                 code: 200,
@@ -75,7 +79,7 @@ class BlogConttroller {
     }
 
     async showBlog(ctx, next){//获取博客内容
-        let { id, state } = ctx.query
+        let { id } = ctx.query
         let res = await BlogSchema.findById(id)
 
         ctx.status = 200

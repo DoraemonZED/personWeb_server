@@ -11,6 +11,10 @@ const NavSchema = new mongoose.Schema({
     order: {//序号用于排序操作
         type: Number,
         default: 0
+    },
+
+    sub_title:{
+        type: Array
     }
 
 },{
